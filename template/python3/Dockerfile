@@ -1,5 +1,5 @@
 FROM --platform=${TARGETPLATFORM:-linux/amd64} ghcr.io/openfaas/classic-watchdog:0.2.0 as watchdog
-FROM --platform=${TARGETPLATFORM:-linux/amd64} pytorch/pytorch
+FROM --platform=${TARGETPLATFORM:-linux/amd64} python:3-alpine
 
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
@@ -26,7 +26,7 @@ USER app
 ENV PATH=$PATH:/home/app/.local/bin:/home/app/python/bin/
 ENV PYTHONPATH=$PYTHONPATH:/home/app/python
 
-RUN pip install -r requirements.txt --target=/home/app/python -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install -r requirements.txt --target=/home/app/python
 
 RUN mkdir -p function
 RUN touch ./function/__init__.py
@@ -34,7 +34,9 @@ RUN touch ./function/__init__.py
 WORKDIR /home/app/function/
 COPY function/requirements.txt	.
 
-RUN pip install -r requirements.txt --target=/home/app/python -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install torch --target=/home/app/python --default-timeout=9999 -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
+
+RUN pip install -r requirements.txt --target=/home/app/python
 
 WORKDIR /home/app/
 
