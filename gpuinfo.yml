@@ -6,5 +6,5 @@ functions:
   gpuinfo:
     lang: python3
     handler: ./gpuinfo
-    image: lbaf23/gpuinfo:latest
+    image: lbaf23/gpuinfo:1.0.0
 
