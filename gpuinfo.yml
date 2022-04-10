@@ -8,5 +8,3 @@ functions:
     handler: ./gpuinfo
     image: lbaf23/gpuinfo:1.0.0
     imagePullPolicy: IfNotPresent
-  
-

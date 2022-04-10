@@ -1,6 +1,6 @@
 import torch
 
-def handle():
+def handle(req):
     res = {
         "is_available": torch.cuda.is_available(),
         "device_name": torch.cuda.get_device_name(),
