@@ -34,7 +34,7 @@ RUN touch ./function/__init__.py
 WORKDIR /home/app/function/
 COPY function/requirements.txt	.
 
-RUN pip install torch --target=/home/app/python --default-timeout=9999 -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
+RUN pip install torch --target=/home/app/python --default-timeout=9999 -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
 
 RUN pip install -r requirements.txt --target=/home/app/python
 
