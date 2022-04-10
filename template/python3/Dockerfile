@@ -1,5 +1,5 @@
 FROM --platform=${TARGETPLATFORM:-linux/amd64} ghcr.io/openfaas/classic-watchdog:0.2.0 as watchdog
-FROM --platform=${TARGETPLATFORM:-linux/amd64} python:3-alpine
+FROM --platform=${TARGETPLATFORM:-linux/amd64} python:3.8
 
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
@@ -9,7 +9,7 @@ ARG ADDITIONAL_PACKAGE
 
 COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
 RUN chmod +x /usr/bin/fwatchdog
-RUN apk --no-cache add ca-certificates ${ADDITIONAL_PACKAGE}
+RUN apt --no-cache add ca-certificates ${ADDITIONAL_PACKAGE}
 
 
 # Add non root user

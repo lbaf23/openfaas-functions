@@ -1,5 +1,5 @@
 FROM --platform=${TARGETPLATFORM:-linux/amd64} ghcr.io/openfaas/classic-watchdog:0.2.0 as watchdog
-FROM --platform=${TARGETPLATFORM:-linux/amd64} python:3
+FROM --platform=${TARGETPLATFORM:-linux/amd64} python:3.8
 
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
@@ -34,6 +34,9 @@ RUN touch ./function/__init__.py
 
 WORKDIR /home/app/function/
 COPY function/requirements.txt	.
+
+RUN pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
+
 
 RUN pip install -r requirements.txt --target=/home/app/python
 

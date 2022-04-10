@@ -4,7 +4,7 @@ provider:
   gateway: http://localhost:31112
 functions:
   gpuinfo:
-    lang: python3
+    lang: python3-debian
     handler: ./gpuinfo
     image: lbaf23/gpuinfo:1.0.0
     imagePullPolicy: IfNotPresent
